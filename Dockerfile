@@ -9,7 +9,8 @@ RUN apt-get update && apt-get -y upgrade \
  jq \
  git \ 
  git-core \
- bash-completion
+ bash-completion \
+ byobu
 
 RUN apt-get -y install golang 
  

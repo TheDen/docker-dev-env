@@ -8,13 +8,13 @@ RUN apt-get update && apt-get -y upgrade \
  curl \
  wget \
  jq \
- git \ 
+ git \
  git-core \
  bash-completion \
  byobu
 
-RUN apt-get -y install golang 
- 
+RUN apt-get -y install golang
+
 RUN apt-get -y install python-pip
 
 RUN apt-get -y install ruby-full

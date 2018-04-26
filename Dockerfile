@@ -11,13 +11,11 @@ RUN apt-get update && apt-get -y upgrade \
  git \
  git-core \
  bash-completion \
- byobu
-
-RUN apt-get -y install golang
-
-RUN apt-get -y install python-pip
-
-RUN apt-get -y install ruby-full
+ byobu \
+ golang \
+ python-pip \
+ python3-pip \
+ ruby-full \
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y nodejs
 RUN apt-get -y install software-properties-common && \

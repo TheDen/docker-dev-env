@@ -16,7 +16,7 @@ RUN apt-get update && apt-get -y upgrade \
  golang \
  python-pip \
  python3-pip \
- ruby-full \
+ ruby-full
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y nodejs
 RUN apt-get -y install software-properties-common && \

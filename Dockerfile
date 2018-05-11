@@ -17,11 +17,13 @@ RUN apt-get update && apt-get -y upgrade \
  python-pip \
  python3-pip \
  ruby-full \
- npm
+ nmap \
+ npm \
+ strace
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
-RUN npm install -g n
-
+#RUN npm install -g n
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 # Ansible is deprecated
 #RUN apt-get -y install software-properties-common && \
 # apt-add-repository ppa:ansible/ansible && \

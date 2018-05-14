@@ -6,11 +6,11 @@ build:
 .PHONY: build
 
 run:
-	docker run -it -P $(IMAGE) bash
+	docker run -it -P --cap-add SYS_PTRACE $(IMAGE) bash
 .PHONY: run
 
 run-mount:
-	docker run -it -P -v $(MOUNTDIR):/$$(basename $(MOUNTDIR)) $(IMAGE) bash
+	docker run -it -P --cap-add SYS_PTRACE -v $(MOUNTDIR):/$$(basename $(MOUNTDIR)) $(IMAGE) bash
 .PHONY: run-mount
 
 exec:

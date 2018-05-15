@@ -2,31 +2,47 @@ FROM ubuntu:16.04
 
 RUN apt-get update && apt-get -y upgrade \
  && apt-get -y install \
+ bash-completion \
  build-essential \
- htop \
- vim \
- shellcheck \
+ byobu \
  curl \
- wget \
- jq \
  git \
  git-core \
- bash-completion \
- byobu \
  golang \
+ htop \
+ jq \
+ locales \
+ man \
+ nmap \
+ npm \
  python-pip \
  python3-pip \
  ruby-full \
- nmap \
- npm \
+ shellcheck \
  strace \
- man
+ sudo \
+ vim \
+ wget
 
+RUN locale-gen en_US.UTF-8
+
+# Install node and nvm
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
-#RUN npm install -g n
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-# Ansible is deprecated
-#RUN apt-get -y install software-properties-common && \
-# apt-add-repository ppa:ansible/ansible && \
-# apt-get update && \
-# apt-get -y install ansible
+
+
+# Disable password and not ask for finger info
+RUN adduser --disabled-password --gecos '' ubuntu
+RUN adduser ubuntu sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+USER ubuntu
+
+# Install vundle
+RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# Pull down .vimrc if a URL is passed
+ARG VIMRC
+RUN test "$VIMRC" && curl -sL $VIMRC -o ~/.vimrc || :
+
+WORKDIR /home/ubuntu

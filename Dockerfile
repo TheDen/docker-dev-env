@@ -21,6 +21,7 @@ RUN apt-get update && apt-get -y upgrade \
  shellcheck \
  strace \
  sudo \
+ tig \
  vim \
  wget
 

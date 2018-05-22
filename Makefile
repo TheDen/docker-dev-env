@@ -1,5 +1,6 @@
-IMAGE="docker-dev-env"
-MOUNTDIR?= $(shell pwd)
+IMAGE?="docker-dev-env"
+COMMITIMAGE="docker-dev-env-commited"
+MOUNTDIR?=$(shell pwd)
 VIMRC?="https://raw.githubusercontent.com/TheDen/dotfiles/master/.vimrc"
 
 build:
@@ -26,6 +27,11 @@ exec:
 	$(eval CONTAINER := $(shell docker ps -f "ancestor=$(IMAGE)" -f "status=running" -q))
 	docker exec -it $(CONTAINER) bash
 .PHONY: exec
+
+commit:
+	$(eval CONTAINER := $(shell docker ps -f "ancestor=$(IMAGE)" -f "status=running" -q))
+	docker commit $(CONTAINER) $(COMMITIMAGE)
+.PHONY: commit
 
 kill:
 	  docker ps -f "ancestor=$(IMAGE)" -f "status=running" -q | xargs docker kill
